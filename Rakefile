@@ -24,12 +24,12 @@ end
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gemspec|
-    gemspec.name = "aegis"
+    gemspec.name = "thelinuxlich-aegis"
     gemspec.summary = "Role-based permissions for your user models."
-    gemspec.email = "github@makandra.de"
-    gemspec.homepage = "http://github.com/makandra/aegis"
+    gemspec.email = "thelinuxlich@gmail.com"
+    gemspec.homepage = "http://github.com/thelinuxlich/aegis"
     gemspec.description = "Aegis is a role-based permission system, where all users are given a role. It is possible to define detailed and complex permissions for each role very easily."
-    gemspec.authors = ["Henning Koch"]
+    gemspec.authors = ["thelinuxlich"]
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
