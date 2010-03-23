@@ -74,7 +74,7 @@ module Aegis
         # Delegate may_...? and may_...! methods to the user's role.
         def method_missing_with_aegis_permissions(symb, *args)
           method_name = symb.to_s
-          if method_name =~ /^may_(.+?)[\!\?]$/
+          if method_name =~ /^#{Aegis::Constants::PERMISSION_PREFIX}_(.+?)[\!\?]$/
             role.send(symb, self, *args)
           elsif method_name =~ /^(.*?)\?$/ && queried_role = ::Permissions.find_role_by_name($1)
             role == queried_role
@@ -86,7 +86,7 @@ module Aegis
         alias_method_chain :method_missing, :aegis_permissions
         
         def respond_to_with_aegis_permissions?(symb, include_private = false)
-          if symb.to_s =~ /^may_(.+?)[\!\?]$/
+          if symb.to_s =~ /^#{Aegis::Constants::PERMISSION_PREFIX}_(.+?)[\!\?]$/
             true
           else
             respond_to_without_aegis_permissions?(symb, include_private)

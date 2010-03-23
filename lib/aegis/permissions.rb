@@ -45,7 +45,7 @@ module Aegis
         end
       end
       
-      def may?(role_or_role_name, permission, *args)
+      define_method "#{Aegis::Constants::PERMISSION_PREFIX}?" do |role_or_role_name, permission, *args|
         role = role_or_role_name.is_a?(Aegis::Role) ? role_or_role_name : find_role_by_name(role_or_role_name)
         blocks = @permission_blocks[permission.to_sym]
         evaluate_permission_blocks(role, blocks, *args)
