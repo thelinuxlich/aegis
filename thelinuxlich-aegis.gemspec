@@ -22,7 +22,6 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
-     "aegis.gemspec",
      "lib/aegis.rb",
      "lib/aegis/constants.rb",
      "lib/aegis/has_role.rb",
