@@ -69,6 +69,18 @@ module Aegis
           end
         end
         
+        if options[:special_permissions]
+          self.instance_eval do 
+            has_many :special_permissions
+            @class_name = self.class_name.underscore
+            SpecialPermission.instance_eval do
+              belongs_to @class_name
+              validates_presence_of @class_name, :permission_module
+              validates_uniqueness_of :permission_module, :scope => "#{@class_name}_id"
+            end
+          end  
+        end
+
         private
         
         # Delegate may_...? and may_...! methods to the user's role.

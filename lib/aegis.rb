@@ -7,4 +7,6 @@ require 'aegis/permission_evaluator'
 require 'aegis/permissions'
 require 'aegis/role'
 require 'rails/active_record'
-
+require 'rails/action_controller'
+require 'rails/special_permission'
+require 'aegis/permission_filter'

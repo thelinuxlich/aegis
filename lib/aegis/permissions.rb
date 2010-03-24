@@ -8,7 +8,7 @@ module Aegis
         extend ClassMethods
       end
     end    
-
+    
     module ClassMethods
  
       def role(role_name, options = {})
@@ -44,6 +44,26 @@ module Aegis
           add_split_crud_permission(permission_name, &block)
         end
       end
+
+      def restful_permissions!(*excluded_controller_names)
+        excluded_controller_names << "rails/info"
+        excluded_controller_names << "rails_info"
+        excluded_controller_names << "application"
+        controllers = ActionController::Routing.possible_controllers.select do |controller|
+          !excluded_controller_names.include? controller
+        end
+        controllers.each do |controller|
+          Aegis::Constants::CRUD_VERBS.zip(["writable","readable","updatable","deletable"]).each do |verb,filter|
+            permission "#{verb}_#{controller}" do |user|
+              allow :everyone do
+                user.send("#{Aegis::Constants::PERMISSION_PREFIX}_#{Aegis::Constants::ADMIN_PREFIX}_#{controller}?") ||
+                  user.special_permissions.send(filter,controller).exists?
+              end
+            end
+          end
+        end
+      end  
+
       
       define_method "#{Aegis::Constants::PERMISSION_PREFIX}?" do |role_or_role_name, permission, *args|
         role = role_or_role_name.is_a?(Aegis::Role) ? role_or_role_name : find_role_by_name(role_or_role_name)

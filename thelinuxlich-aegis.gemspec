@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{thelinuxlich-aegis}
-  s.version = "1.1.6"
+  s.version = "1.1.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["thelinuxlich"]
-  s.date = %q{2010-03-23}
+  s.date = %q{2010-03-24}
   s.description = %q{Aegis is a role-based permission system, where all users are given a role. It is possible to define detailed and complex permissions for each role very easily.}
   s.email = %q{thelinuxlich@gmail.com}
   s.extra_rdoc_files = [
@@ -59,7 +59,8 @@ Gem::Specification.new do |s|
      "test/has_role_test.rb",
      "test/permissions_test.rb",
      "test/test_helper.rb",
-     "test/validation_test.rb"
+     "test/validation_test.rb",
+     "thelinuxlich-aegis.gemspec"
   ]
   s.homepage = %q{http://github.com/thelinuxlich/aegis}
   s.rdoc_options = ["--charset=UTF-8"]
