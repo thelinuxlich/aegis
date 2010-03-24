@@ -22,7 +22,7 @@ module Aegis
             else
               permission_type = action_name
             end
-            current_user.send("#{Aegis::Constants::PERMISSION_PREFIX}_#{permission_type}_#{controller_name}?")
+            eval "#{current_user}.#{Aegis::Constants::PERMISSION_PREFIX}_#{permission_type}_#{controller_name}?"
           end
       end
     end
