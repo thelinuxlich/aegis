@@ -5,13 +5,20 @@ Aegis allows you to manage fine-grained, complex permission for user accounts in
 == Installation
 
 Add the following to your <tt>Initializer.run</tt> block in your <tt>environment.rb</tt>:
-    config.gem 'aegis', :source => 'http://gemcutter.org'
+    config.gem 'thelinuxlich-aegis', :lib => 'aegis'
 Then do a 
     sudo rake gems:install
 
 Alternatively, use
-    sudo gem sources -a http://gemcutter.org
-    sudo gem install aegis
+    sudo gem install thelinuxlich-aegis
+
+== Changes in this fork
+Now you can set the permission prefix with your locale(default is 'may')
+Example: in locale/en.yml:
+  aegis:
+    permission_prefix: 'should'
+
+And then you can verify authorization with current_user.should_edit_posts?
 
 == Example 
 
