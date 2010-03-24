@@ -7,7 +7,7 @@ module Aegis
         end
 
         protected
-          def authorize_action(current_user,option = {})
+          def authorize_action(current_user,options = {})
             return if options[:except].include? controller_name
             permission_type = ""
             case action_name
