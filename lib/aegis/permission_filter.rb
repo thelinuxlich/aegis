@@ -2,12 +2,13 @@ module Aegis
   module PermissionFilter
     def self.extended(base)
       base.instance_eval do
-        def authorize_first!(current_user)
-          before_filter{authorize_action(current_user)}
+        def authorize_first!(current_user, options = {})
+          before_filter{authorize_action(current_user,options)}
         end
 
         protected
           def authorize_action(current_user)
+            return if options[:except].include? controller_name
             permission_type = ""
             case action_name
             when "index","show"

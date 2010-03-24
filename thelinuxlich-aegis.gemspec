@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".gitignore",
+     ":test",
      "MIT-LICENSE",
      "README.rdoc",
      "Rakefile",
@@ -28,9 +29,14 @@ Gem::Specification.new do |s|
      "lib/aegis/normalization.rb",
      "lib/aegis/permission_error.rb",
      "lib/aegis/permission_evaluator.rb",
+     "lib/aegis/permission_filter.rb",
      "lib/aegis/permissions.rb",
      "lib/aegis/role.rb",
+     "lib/generators/aegis_generator.rb",
+     "lib/generators/templates/migration.rb",
+     "lib/rails/action_controller.rb",
      "lib/rails/active_record.rb",
+     "lib/rails/special_permission.rb",
      "test/app_root/app/controllers/application_controller.rb",
      "test/app_root/app/models/old_soldier.rb",
      "test/app_root/app/models/permissions.rb",
