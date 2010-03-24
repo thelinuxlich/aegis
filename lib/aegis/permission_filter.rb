@@ -8,6 +8,8 @@ module Aegis
 
         protected
           def authorize_action(current_user,options = {})
+            options = {:except => []}.merge(options)
+            options[:except] << "application"
             return if options[:except].include? controller_name
             permission_type = ""
             case action_name

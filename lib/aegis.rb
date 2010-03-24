@@ -1,5 +1,6 @@
 # Include hook code here
 require 'aegis/constants'
+require 'rails/special_permission'
 require 'aegis/has_role'
 require 'aegis/normalization'
 require 'aegis/permission_error'
@@ -8,5 +9,4 @@ require 'aegis/permissions'
 require 'aegis/role'
 require 'rails/active_record'
 require 'rails/action_controller'
-require 'rails/special_permission'
 require 'aegis/permission_filter'
