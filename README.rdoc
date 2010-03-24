@@ -37,23 +37,23 @@ In Permissions class, you can add restful_permissions!(:except => [ARRAY_OF_CONT
 Example: Imagine we have a controller called Posts. It will add the permission methods may_read_posts?, may_write_posts?, may_update_posts?, may_destroy_posts?, all customizable with locales.
 
 For special permissions, you'll also need a table for it. Create a migration like this:
-class CreateSpecialPermissions < ActiveRecord::Migration
-  def self.up
-    create_table :special_permissions do |t|
-      t.integer :user_id
-      t.string :permission_module
-      t.boolean :permission_read, :default => false
-      t.boolean :permission_write, :default => false
-      t.boolean :permission_destroy, :default => false
-      t.boolean :permission_update, :default => false
-      t.timestamps
+  class CreateSpecialPermissions < ActiveRecord::Migration
+    def self.up
+      create_table :special_permissions do |t|
+        t.integer :user_id
+        t.string :permission_module
+        t.boolean :permission_read, :default => false
+        t.boolean :permission_write, :default => false
+        t.boolean :permission_destroy, :default => false
+        t.boolean :permission_update, :default => false
+        t.timestamps
+      end
+    end
+  
+    def self.down
+      drop_table :special_permissions
     end
   end
-
-  def self.down
-    drop_table :special_permissions
-  end
-end
 
 Until I fix the generator, the migration part is manual, unfortunately :(
 
