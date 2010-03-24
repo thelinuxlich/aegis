@@ -71,7 +71,7 @@ module Aegis
         
         if options[:special_permissions]
           self.instance_eval do 
-            has_many :special_permissions
+            has_many :special_permissions, :foreign_key => "user_id"
             @class_name = self.class_name.underscore
             SpecialPermission.instance_eval do
               belongs_to @class_name
