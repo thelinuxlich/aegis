@@ -15,8 +15,8 @@ Alternatively, use
 == Changes in this fork
 Now you can set the permission prefix with your locale(default is 'may')
 Example: in locale/en.yml:
-aegis:
-  permission_prefix: 'should'
+  aegis:
+    permission_prefix: 'should'
 
 And then you can verify authorization with current_user.should_edit_posts?
 
