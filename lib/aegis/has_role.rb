@@ -70,14 +70,14 @@ module Aegis
         end
         
         if options[:special_permissions]
-          self.instance_eval do 
-            has_many :special_permissions, :foreign_key => "user_id"
+          self.class_eval do 
+            self.has_many :special_permissions, :foreign_key => "user_id"
             @class_name = self.class_name.underscore
-            SpecialPermission.instance_eval do
-              belongs_to @class_name
-              validates_presence_of @class_name, :permission_module
-              validates_uniqueness_of :permission_module, :scope => "#{@class_name}_id"
-            end
+            SpecialPermission.class_eval(
+              "self.belongs_to :#{@class_name}
+              self.validates_presence_of :#{@class_name}, :permission_module
+              self.validates_uniqueness_of :permission_module, :scope => '#{@class_name}_id'"
+            )
           end  
         end
 
