@@ -45,12 +45,13 @@ module Aegis
         end
       end
 
-      def restful_permissions!(*excluded_controller_names)
-        excluded_controller_names << "rails/info"
-        excluded_controller_names << "rails_info"
-        excluded_controller_names << "application"
+      def restful_permissions!(options = {})
+        options = {:except => []}.merge(options)
+        options[:except] << "rails/info"
+        options[:except] << "rails_info"
+        options[:except] << "application"
         controllers = ActionController::Routing.possible_controllers.select do |controller|
-          !excluded_controller_names.include? controller
+          !options[:except].include? controller
         end
         controllers.each do |controller|
           Aegis::Constants::CRUD_VERBS.zip(["writable","readable","updatable","deletable"]).each do |verb,filter|
