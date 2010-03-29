@@ -13,12 +13,49 @@ Alternatively, use
     sudo gem install thelinuxlich-aegis
 
 == Changes in this fork
-Now you can set the permission prefix with your locale(default is 'may')
+WARNING! Opinionated stuff!
+Now you can set the permission prefix, admin and crud verbs with your locale(default is 'may','admin','read','write','update' and 'destroy', respectively)
 Example: in locale/en.yml:
   aegis:
-    permission_prefix: 'should'
+    permission: 'should'
+    admin: 'manage'
+    read: 'access'
+    write: 'insert'
+    update: 'update'
+    destroy: 'delete'
 
-And then you can verify authorization with current_user.should_edit_posts?
+And then you can verify authorization with current_user.should_access_posts?
+
+Also, there is a class method you can put on ApplicationController(or anything that extends ActionController::Base) to automatically add before_filter to all REST actions verifying authorization:
+  authorize_first!(:current_user, options)
+  
+  First parameter is a string containing the method to access the current user on your favorite authentication gem, second parameter accepts :except => [ARRAY_OF_CONTROLLER_NAMES]
+
+The user class now can call has_role :special_permissions => true, and it will add a has_many association with special_permissions to really customize what every role can access.
+
+In Permissions class, you can add restful_permissions!(:except => [ARRAY_OF_CONTROLLER_NAMES]) and it will add the 4 crud verbs to verify permission with every role, first verifying if the current user has admin access then verifying in SpecialPermission association.
+Example: Imagine we have a controller called Posts. It will add the permission methods may_read_posts?, may_write_posts?, may_update_posts?, may_destroy_posts?, all customizable with locales.
+
+For special permissions, you'll also need a table for it. Create a migration like this:
+  class CreateSpecialPermissions < ActiveRecord::Migration
+    def self.up
+      create_table :special_permissions do |t|
+        t.integer :user_id
+        t.string :permission_module
+        t.boolean :permission_read, :default => false
+        t.boolean :permission_write, :default => false
+        t.boolean :permission_destroy, :default => false
+        t.boolean :permission_update, :default => false
+        t.timestamps
+      end
+    end
+  
+    def self.down
+      drop_table :special_permissions
+    end
+  end
+
+Until I fix the generator, the migration part is manual, unfortunately :(
 
 == Example 
 
